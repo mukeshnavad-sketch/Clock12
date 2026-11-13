@@ -1,0 +1,134 @@
+:root {
+    --gold: #ffcd34;
+    --glow: rgba(252, 211, 77, 0.45);
+    --cyan: #3bb8f8;
+    --cyan-glow: rgba(56, 189, 248, 0.5);
+    --bg: #05060f;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at center, #13173d 0%, var(--bg) 80%);
+    overflow: hidden;
+    font-family: "Cinzel", serif, system-ui;
+    color: var(--gold);
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(1px 1px at 25px 35px, #fff, transparent),
+                      radial-gradient(1.5px 1.5px at 140px 80px, var(--cyan), transparent);
+    background-size: 300px 300px;
+    opacity: 0.6;
+}
+
+.clock {
+    position: relative;
+    width: min(85vw, 400px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+}
+
+.ring-outer {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    border: 2px dashed rgba(252, 211, 77, 0.35);
+    animation: spin 60s linear infinite;
+}
+
+.ring-runes {
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 25px var(--cyan-glow);
+    border-radius: 50%;
+    animation: spin-rev 45s linear infinite;
+}
+
+.dial {
+    position: absolute;
+    inset: 42px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #13173d 0%, #05060f 100%);
+    box-shadow: 0 0 25px rgba(252, 211, 77, 0.3);
+    border: 2px solid rgba(252, 211, 77, 0.5);
+}
+
+.num {
+    position: absolute;
+    inset: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transform: rotate(calc(var(--i) * 30deg));
+}
+
+.num b {
+    display: inline-block;
+    transform: rotate(calc(var(--i) * -30deg));
+}
+
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    transform: translateX(-50%) rotate(0deg);
+}
+
+.hour {
+    width: 6px;
+    height: 24%;
+    margin-left: -3px;
+    background: linear-gradient(to top, var(--gold), #fff);
+    color: var(--gold);
+    clip-path: polygon(0% 100%, 50% 85%, 100% 100%, 80% 0%, 20% 0%);
+}
+
+.minute {
+    width: 4px;
+    height: 35%;
+    margin-left: -2px;
+    background: linear-gradient(to top, var(--cyan), #fff);
+    color: var(--cyan);
+    clip-path: polygon(0% 100%, 50% 88%, 100% 100%, 75% 0%, 25% 0%);
+}
+
+.second {
+    width: 2px;
+    height: 42%;
+    margin-left: -1px;
+    background: linear-gradient(to top, #f43f5e, #fff);
+}
+
+.pivot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0%, var(--gold) 60%, #b45309 100%);
+    z-index: 10;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes spin-rev {
+    to { transform: rotate(-360deg); }
+}
